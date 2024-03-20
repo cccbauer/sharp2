@@ -17,4 +17,4 @@ download or clone this folder to get the scripts
 
 ### Running a real-time Neurofeedback Simulation
 
-Example Network-Based neurofeedback run [balltask](rt-Psychopy/balltask)
+Example Network-Based neurofeedback run [balltask](https://github.com/cccbauer/sharp2/tree/main/rt-Psychopy/balltask)

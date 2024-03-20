@@ -8,7 +8,8 @@ This repo contains scripts for:
 * Running MURFI: [murfi-rt-PyProject](murfi-rt-PyProject)
 * Running ball task for real-time feedback: [rt-PsychoPy](https://github.com/cccbauer/sharp2/tree/main/rt-Psychopy)
 
-Running a real-time Neurofeedback
+### Running a real-time Neurofeedback
 
-* Example Network-Based neurofeedback run balltask
-* Example Network Based Experience Sampling: experiencesampling
+Example Network-Based neurofeedback run [balltask](https://github.com/cccbauer/sharp2/tree/main/rt-Psychopy/balltask)
+
+Example Network Based Experience Sampling: [experiencesampling](https://github.com/cccbauer/sharp2/tree/main/rt-Psychopy/experiencesampling)

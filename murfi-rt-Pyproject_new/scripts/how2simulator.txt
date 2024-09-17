@@ -1,0 +1,7 @@
+
+After MURFI is ready to recieive images
+Open a second terminal and paste this code:
+
+
+singularity exec /home/tosa/singularity-images/murfi.sif  /home/tosa/sharp2/murfi-rt-Pyproject/scripts/servedata_custom_smhc.sh /home/tosa/sharp2/murfi-rt-Pyproject/scripts/img/ 3 2 1.2
+

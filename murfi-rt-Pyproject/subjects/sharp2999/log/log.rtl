@@ -1,0 +1,823 @@
+################################################################
+
+# realtime system log file
+created 2024/9/17 20:53:9.951631
+
+configured the mosaic
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 10
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + false
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+--------------
+
+initialization completed at 2024/9/17 20:53:9.951990
+began running at 2024/9/17 20:53:9.952077
+received image from scanner: series 1 acquisition 1
+received image from scanner: series 0 acquisition 2
+################################################################
+
+# realtime system log file
+created 2024/9/17 20:53:46.778314
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 250
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + false
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=useBet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + B
+    + option
+      + name=filename
+      + B
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + A
+    + option
+      + name=filename
+      + A
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 0
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 0
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + B
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + A
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+initialization completed at 2024/9/17 20:53:46.787047
+began running at 2024/9/17 20:53:46.787116
+received image from scanner: series 2 acquisition 1
+maskgen: produced mask brain of 284947 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series2_brain.nii
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 1
+RtCurrentActivation::process: residual is NULL at tr 1
+received image from scanner: series 1 acquisition 2
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 2
+RtCurrentActivation::process: residual is NULL at tr 2
+received image from scanner: series 1 acquisition 3
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 3
+RtCurrentActivation::process: residual is NULL at tr 3
+received image from scanner: series 1 acquisition 4
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 4
+RtCurrentActivation::process: residual is NULL at tr 4
+received image from scanner: series 1 acquisition 5
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 5
+RtCurrentActivation::process: residual is NULL at tr 5
+received image from scanner: series 1 acquisition 6
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 6
+RtCurrentActivation::process: residual is NULL at tr 6
+received image from scanner: series 1 acquisition 7
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 7
+RtCurrentActivation::process: residual is NULL at tr 7
+received image from scanner: series 1 acquisition 8
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 8
+RtCurrentActivation::process: residual is NULL at tr 8
+received image from scanner: series 1 acquisition 9
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 9
+RtCurrentActivation::process: residual is NULL at tr 9
+received image from scanner: series 1 acquisition 10
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 10
+RtCurrentActivation::process: residual is NULL at tr 10
+received image from scanner: series 1 acquisition 11
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 11
+RtCurrentActivation::process: residual is NULL at tr 11
+received image from scanner: series 1 acquisition 12
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 12
+RtCurrentActivation::process: residual is NULL at tr 12
+received image from scanner: series 1 acquisition 13
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 13
+RtCurrentActivation::process: residual is NULL at tr 13
+received image from scanner: series 1 acquisition 14
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 14
+RtCurrentActivation::process: residual is NULL at tr 14
+received image from scanner: series 1 acquisition 15
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 15
+RtCurrentActivation::process: residual is NULL at tr 15
+received image from scanner: series 1 acquisition 16
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 16
+RtCurrentActivation::process: residual is NULL at tr 16
+received image from scanner: series 1 acquisition 17
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 17
+RtCurrentActivation::process: residual is NULL at tr 17
+received image from scanner: series 1 acquisition 18
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 18
+RtCurrentActivation::process: residual is NULL at tr 18
+received image from scanner: series 1 acquisition 19
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 19
+RtCurrentActivation::process: residual is NULL at tr 19
+received image from scanner: series 1 acquisition 20
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 20
+RtCurrentActivation::process: residual is NULL at tr 20
+received image from scanner: series 1 acquisition 21
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 21
+RtCurrentActivation::process: residual is NULL at tr 21
+received image from scanner: series 1 acquisition 22
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 22
+RtCurrentActivation::process: residual is NULL at tr 22
+received image from scanner: series 1 acquisition 23
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 23
+RtCurrentActivation::process: residual is NULL at tr 23
+received image from scanner: series 1 acquisition 24
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 24
+RtCurrentActivation::process: residual is NULL at tr 24
+received image from scanner: series 1 acquisition 25
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 25
+RtCurrentActivation::process: residual is NULL at tr 25
+received image from scanner: series 1 acquisition 26
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 26
+RtCurrentActivation::process: residual is NULL at tr 26
+received image from scanner: series 1 acquisition 27
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 27
+RtCurrentActivation::process: residual is NULL at tr 27
+received image from scanner: series 1 acquisition 28
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 28
+RtCurrentActivation::process: residual is NULL at tr 28
+received image from scanner: series 1 acquisition 29
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 29
+RtCurrentActivation::process: residual is NULL at tr 29
+received image from scanner: series 1 acquisition 30
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 30
+RtCurrentActivation::process: residual is NULL at tr 30
+received image from scanner: series 1 acquisition 31
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 31
+RtCurrentActivation::process: residual is NULL at tr 31
+received image from scanner: series 1 acquisition 32
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 32
+RtCurrentActivation::process: residual is NULL at tr 32
+received image from scanner: series 1 acquisition 33
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 33
+RtCurrentActivation::process: residual is NULL at tr 33
+received image from scanner: series 1 acquisition 34
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 34
+RtCurrentActivation::process: residual is NULL at tr 34
+received image from scanner: series 1 acquisition 35
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 35
+RtCurrentActivation::process: residual is NULL at tr 35
+received image from scanner: series 1 acquisition 36
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 36
+RtCurrentActivation::process: residual is NULL at tr 36
+received image from scanner: series 1 acquisition 37
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 37
+RtCurrentActivation::process: residual is NULL at tr 37
+received image from scanner: series 1 acquisition 38
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 38
+RtCurrentActivation::process: residual is NULL at tr 38
+received image from scanner: series 1 acquisition 39
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 39
+RtCurrentActivation::process: residual is NULL at tr 39
+received image from scanner: series 1 acquisition 40
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 40
+RtCurrentActivation::process: residual is NULL at tr 40
+received image from scanner: series 1 acquisition 41
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 41
+RtCurrentActivation::process: residual is NULL at tr 41
+received image from scanner: series 1 acquisition 42
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 42
+RtCurrentActivation::process: residual is NULL at tr 42
+received image from scanner: series 1 acquisition 43
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 43
+RtCurrentActivation::process: residual is NULL at tr 43
+received image from scanner: series 1 acquisition 44
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 44
+RtCurrentActivation::process: residual is NULL at tr 44
+received image from scanner: series 1 acquisition 45
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 45
+RtCurrentActivation::process: residual is NULL at tr 45
+received image from scanner: series 1 acquisition 46
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 46
+RtCurrentActivation::process: residual is NULL at tr 46
+received image from scanner: series 1 acquisition 47
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 47
+RtCurrentActivation::process: residual is NULL at tr 47
+received image from scanner: series 1 acquisition 48
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 48
+RtCurrentActivation::process: residual is NULL at tr 48
+received image from scanner: series 1 acquisition 49
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 49
+RtCurrentActivation::process: residual is NULL at tr 49
+received image from scanner: series 1 acquisition 50
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 50
+RtCurrentActivation::process: residual is NULL at tr 50
+received image from scanner: series 1 acquisition 51
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 51
+RtCurrentActivation::process: residual is NULL at tr 51
+received image from scanner: series 1 acquisition 52
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 52
+RtCurrentActivation::process: residual is NULL at tr 52
+received image from scanner: series 1 acquisition 53
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 53
+RtCurrentActivation::process: residual is NULL at tr 53
+received image from scanner: series 1 acquisition 54
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 54
+RtCurrentActivation::process: residual is NULL at tr 54
+received image from scanner: series 1 acquisition 55
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 55
+RtCurrentActivation::process: residual is NULL at tr 55
+received image from scanner: series 1 acquisition 56
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 56
+RtCurrentActivation::process: residual is NULL at tr 56
+received image from scanner: series 1 acquisition 57
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 57
+RtCurrentActivation::process: residual is NULL at tr 57
+received image from scanner: series 1 acquisition 58
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 58
+RtCurrentActivation::process: residual is NULL at tr 58
+received image from scanner: series 1 acquisition 59
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 59
+RtCurrentActivation::process: residual is NULL at tr 59
+received image from scanner: series 1 acquisition 60
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 60
+RtCurrentActivation::process: residual is NULL at tr 60
+received image from scanner: series 1 acquisition 61
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 61
+RtCurrentActivation::process: residual is NULL at tr 61
+received image from scanner: series 1 acquisition 62
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 62
+RtCurrentActivation::process: residual is NULL at tr 62
+received image from scanner: series 1 acquisition 63
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 63
+RtCurrentActivation::process: residual is NULL at tr 63
+received image from scanner: series 1 acquisition 64
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 64
+RtCurrentActivation::process: residual is NULL at tr 64
+received image from scanner: series 1 acquisition 65
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 65
+RtCurrentActivation::process: residual is NULL at tr 65
+received image from scanner: series 1 acquisition 66
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 66
+RtCurrentActivation::process: residual is NULL at tr 66
+received image from scanner: series 1 acquisition 67
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 67
+RtCurrentActivation::process: residual is NULL at tr 67
+received image from scanner: series 1 acquisition 68
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 68
+RtCurrentActivation::process: residual is NULL at tr 68
+received image from scanner: series 1 acquisition 69
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 69
+RtCurrentActivation::process: residual is NULL at tr 69
+received image from scanner: series 1 acquisition 70
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 70
+RtCurrentActivation::process: residual is NULL at tr 70
+received image from scanner: series 1 acquisition 71
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 71
+RtCurrentActivation::process: residual is NULL at tr 71
+received image from scanner: series 1 acquisition 72
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
+RtIncrementalGLM: done at tr 72
+RtCurrentActivation::process: residual is NULL at tr 72

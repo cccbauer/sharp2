@@ -39,298 +39,297 @@ template_lps_path=${SCRIPT_PATH}/MNI152_T1_2mm_LPS_brain
 # Set paths & check that computers are properly connected with scanner via Ethernet
 if [ ${step} = setup ]
 then
-    #clear
-    echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-    echo "+ Wellcome to MURFI real-time Neurofeedback"
-    echo "+ running " ${step}
-    export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
-    export MURFI_SUBJECT_NAME=$subj
-    echo "+ subject ID: "$MURFI_SUBJECT_NAME
-    echo "+ working dir: $MURFI_SUBJECTS_DIR"
-    #echo "disabling wireless internet"
-    #ifdown wlan0
-    echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-    echo "checking the presence of scanner and stim computer"
-    #ping -c 3 192.168.2.1
-    #ping -c 3 192.168.2.6
-    echo "make sure Wi-Fi is off"
-    echo "make sure you are Wired Connected to rt-fMRI"
-    echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+	#clear
+	echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo "+ Wellcome to MURFI real-time Neurofeedback"
+	echo "+ running " ${step}
+	export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
+	export MURFI_SUBJECT_NAME=$subj
+	echo "+ subject ID: "$MURFI_SUBJECT_NAME
+	echo "+ working dir: $MURFI_SUBJECTS_DIR"
+	#echo "disabling wireless internet"
+	#ifdown wlan0
+	echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo "checking the presence of scanner and stim computer"
+	#ping -c 3 192.168.2.1
+	#ping -c 3 192.168.2.6
+	echo "make sure Wi-Fi is off"
+	echo "make sure you are Wired Connected to rt-fMRI"
+	echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 fi  
 
 # run MURFI for 2vol scan (to be used for registering masks to native space)  
 if [ ${step} = 2vol ]
 then
-    clear
-    echo "ready to receive 2 volume scan"
-    singularity run murfi2.1.sif murfi -f $subj_dir/xml/2vol.xml
+	clear
+	echo "ready to receive 2 volume scan"
+	singularity run murfi2.1.sif murfi -f $subj_dir/xml/2vol.xml
 fi
 
 
 if  [ ${step} = feedback ]
 then
 clear
-    echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-    echo "ready to receive rtdmn feedback scan"
-    export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
-    export MURFI_SUBJECT_NAME=$subj 
-    singularity run murfi2.1.sif murfi -f $subj_dir_absolute/xml/rtdmn_smc.xml
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo "ready to receive rtdmn feedback scan"
+	export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
+	export MURFI_SUBJECT_NAME=$subj 
+	singularity run murfi2.1.sif murfi -f $subj_dir_absolute/xml/rtdmn_smc.xml
 fi
 
 
 if  [ ${step} = 2min_resting_state ]
 then
 clear
-    echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-    echo "ready to receive resting state scan"
-    export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
-    export MURFI_SUBJECT_NAME=$subj
-    singularity run murfi2.1.sif murfi -f $subj_dir/xml/rest_2min.xml
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo "ready to receive resting state scan"
+	export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
+	export MURFI_SUBJECT_NAME=$subj
+	singularity run murfi2.1.sif murfi -f $subj_dir/xml/rest_2min.xml
 
 fi
 
 if  [ ${step} = resting_state ]
 then
 clear
-    echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-    echo "ready to receive resting state scan"
-    export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
-    export MURFI_SUBJECT_NAME=$subj
-    singularity run murfi2.1.sif murfi -f $subj_dir/xml/rest.xml
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo "ready to receive resting state scan"
+	export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
+	export MURFI_SUBJECT_NAME=$subj
+	singularity run murfi2.1.sif murfi -f $subj_dir/xml/rest.xml
 
 fi
 
 if  [ ${step} = experience_sampling ]
 then
 clear
-    echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-    echo "ready to receive resting state scan"
-    export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
-    export MURFI_SUBJECT_NAME=$subj
-    singularity run murfi2.1.sif murfi -f $subj_dir/xml/experiencesampling_smc.xml
+	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo "ready to receive resting state scan"
+	export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
+	export MURFI_SUBJECT_NAME=$subj
+	singularity run murfi2.1.sif murfi -f $subj_dir/xml/experiencesampling_smc.xml
 
-fi
+	fi
 
-if  [ ${step} = extract_rs_networks ]
+
+if [ "${step}" = extract_rs_networks ]
 then
 clear
 
-    #Look if directory already exists
+    # Look if directory already exists
     ica_directory="$subj_dir/rest/rs_network.ica"
 
-
-
-    if [ -d "$ica_directory" ]; then
+    if [ ! -d "$ica_directory" ]; then
+        echo "Directory does not exist. Proceeding with script..."
+    else
         # Zenity to prompt the user
-        user_decision=$(zenity --question \
+        zenity --question \
             --title="Directory Exists" \
-            --text="The directory $ica_directory already exists.\n\n\nDo you want to proceed and overwrite its contents?" \
+            --text="The directory $ica_directory already exists.\n\nDo you want to proceed and overwrite its contents?" \
             --ok-label="Yes" \
             --cancel-label="No" \
-            --width 600 --height 600 \
-            2>/dev/null)
+            --width 600 --height 100 \
+            2>/dev/null
 
         # Check the exit status of zenity
         if [ $? -eq 0 ]; then
-            echo "Overwriting existing RS directory..."
+            echo "Removing existing directory..."
             rm -rf "$ica_directory"
-
-            echo "Creating directory $ica_directory"
-            mkdir -p "$ica_directory"
-
-            echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-            echo "+ compiling resting state run into analysis folder"
-            expected_volumes=267
-            runstring="Resting state runs should have ${expected_volumes} volumes\n"
-            for i in {0..10};
-            do
-                # Find # of volumes in each run
-                run_volumes=$(find ${subj_dir_absolute}/img/ -type f \( -iname "img-0000${i}*" \) | wc -l)
-                if [ ${run_volumes} -ne 0 ]
-                then
-                    runstring="${runstring}\nRun ${i}: ${run_volumes} volumes"
-                fi
-            done
-
-            # use zenity to allow user to choose which resting volume to use (and how many runs to use)
-            input_string=$(zenity --forms --title="Which resting state runs to use for ICA?" \
-                --separator=" " --width 600 --height 600 \
-                --add-entry="First Input Run #" \
-                --add-entry="Second Input Run #" --text="`printf "${runstring}"`"\
-                --add-combo="`printf "How many resting runs to use for ICA?\nOnly use runs that have 200+ volumes for ICA"`" --combo-values "2 (default) |1 (only to be used if there aren't 2 viable runs to use)")
-
-            # check that exit button hasn't been clicked
-            if [[ $? == 1 ]];
-            then
-                exit 0
-            fi
-
-            # parse zenity output using space as delimiter
-            read -a input_array <<< $input_string
-            rest_runA_num=${input_array[0]}
-            rest_runB_num=${input_array[1]}
-
-            # Use 2 resting runs for ICA
-            echo ${input_array[2]}
-            if [[ ${input_array[2]} == '2' ]] ;
-            then
-                echo "Using run ${rest_runA_num} and run ${rest_runB_num}"
-                echo "Pre-processing images before ICA..."
-
-                # merge individual volumes to make 1 file for each resting state run
-                rest_runA_filename=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold.nii'
-                rest_runB_filename=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold.nii' 
-
-                # Merge all volumes in each run 
-                volsA=$(find ${subj_dir_absolute}/img/ -type f \( -iname "img-0000${rest_runA_num}*" \))
-                volsB=$(find ${subj_dir_absolute}/img/ -type f \( -iname "img-0000${rest_runB_num}*" \)) 
-                fslmerge -tr $rest_runA_filename $volsA ${TR}
-                fslmerge -tr $rest_runB_filename $volsB ${TR}
-
-                # figure out how many volumes of resting state data there were to be used in ICA
-                rest_runA_volumes=$(fslnvols $rest_runA_filename)
-                rest_runB_volumes=$(fslnvols $rest_runB_filename)
-                if [ ${rest_runA_volumes} -ne ${expected_volumes} ] || [ ${rest_runB_volumes} -ne ${expected_volumes} ]; 
-                then
-                    echo "WARNING! ${rest_runA_volumes} volumes of resting-state data found for run 1."
-                    echo "${rest_runB_volumes} volumes of resting-state data found for run 2. ${expected_volumes} expected?"
-
-                    # calculate minimum volumes (which run has fewer, then use fslroi to cut both runs to this minimum)
-                    minvols=$(( rest_runA_volumes < rest_runB_volumes ? rest_runA_volumes : rest_runB_volumes ))
-                    echo "Clipping runs so that both have ${minvols} volumes"
-                    fslroi $rest_runA_filename $rest_runA_filename 0 $minvols
-                    fslroi $rest_runB_filename $rest_runB_filename 0 $minvols
-                else
-                    minvols=$expected_volumes
-                fi
-
-                echo "+ computing resting state networks this will take about 25 minutes"
-                echo "+ started at: $(date)"
-
-                # realign volumes pre-FEAT
-                mcflirt -in $rest_runA_filename -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii'
-                mcflirt -in $rest_runB_filename -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt.nii'
-
-                # get median volume of 1st run
-                fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii' \
-                    -Tmedian $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii'
-
-                # get median volume of 2st run
-                fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt.nii' \
-                    -Tmedian $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_median.nii'
-                        
-                # calculate registration matrix of median of 2nd run to median of 1st run
-                flirt -cost leastsq -dof 6  -noresample -noresampblur \
-                    -in $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_median.nii' \
-                    -ref $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
-                    -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run2_median_to_run1_median.nii' \
-                    -omat $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run2_median_to_run1_median.mat' 
-
-
-                # check registration of median of 2nd run to median of 1st run
-                slices $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
-                    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run2_median_to_run1_median.nii' \
-                    -o $subj_dir_absolute/qc/flirt_median_rest_check.gif 
-
-                # use registration matrix previously calculated to warp entire 2nd run to median of 1st run
-                flirt -noresample -noresampblur -interp nearestneighbour \
-                    -in  $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt.nii' \
-                    -ref $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii'  \
-                    -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_run1space.nii' \
-                    -init $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run2_median_to_run1_median.mat' \
-                    -applyxfm
-
-                # skullstrip median of 1st run & check the generated mask
-                bet $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
-                    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii' \
-                    -R -f 0.4 -g 0 -m 
-
-                slices $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
-                    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii' \
-                    -o $subj_dir_absolute/qc/rest_skullstrip_check_run1.gif
-
-                # mask both runs by the mask from skullstriped median of 1st run
-                fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii' \
-                    -mas $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet_mask.nii' \
-                    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_masked.nii'
-
-                fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_run1space.nii' \
-                    -mas $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet_mask.nii' \
-                    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_run1space_masked.nii'
-
-
-                
-                ica_run1_input=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_masked.nii'
-                ica_run2_input=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_run1space_masked.nii'
-                reference_vol_for_ica=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii'
-
-                # update FEAT template with paths and # of volumes of resting state run
-                cp $fsl_scripts/basic_ica_template.fsf $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
-                OUTPUT_dir=$subj_dir_absolute/rest/rs_network
-                sed -i "s#DATA1#$ica_run1_input#g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
-                sed -i "s#DATA2#$ica_run2_input#g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
-                sed -i "s#OUTPUT#$OUTPUT_dir#g" $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
-                sed -i "s#REFERENCE_VOL#$reference_vol_for_ica#g" $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf 
-
-                # update fsf to match number of rest volumes
-                sed -i "s/set fmri(npts) 250/set fmri(npts) ${minvols}/g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
-                feat $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf        
-            else
-                # Use just a single run for ICA (only to be used when 2 isn't viable)
-                echo "Using run ${rest_runA_num} for single-run ICA"
-
-                # merge individual volumes to make 1 file for each resting state run
-                rest_runA_filename=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold'.nii
-                volsA=$(find ${subj_dir_absolute}/img/ -type f \( -iname "img-0000${rest_runA_num}*" \))
-                fslmerge -tr $rest_runA_filename $volsA ${TR}
-
-                # figure out how many volumes of resting state data there were to be used in ICA
-                rest_runA_volumes=$(fslnvols $rest_runA_filename)
-                echo "${rest_runA_volumes} volumes of resting-state data found for run 1."
-                echo "+ computing resting state networks this will take about 25 minutes"
-                echo "+ started at: $(date)"
-
-                # realign volumes pre-FEAT
-                mcflirt -in $rest_runA_filename -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii'
-
-                # get median volume of 1st run
-                fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii' \
-                    -Tmedian $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii'
-            
-                # skullstrip median of 1st run & check the generated mask
-                bet $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
-                    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii' \
-                    -R -f 0.4 -g 0 -m 
-
-                slices $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
-                    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii' \
-                    -o $subj_dir_absolute/qc/rest_skullstrip_check_run1.gif
-
-                # mask run1 by the mask from skullstriped median of 1st run
-                fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii' \
-                    -mas $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet_mask.nii' \
-                    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_masked.nii'
-                
-                ica_run1_input=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_masked.nii'
-                reference_vol_for_ica=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii'
-
-                # update FEAT template with paths and # of volumes of resting state run
-                cp fsl_scripts/basic_ica_template_single_run.fsf $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
-                OUTPUT_dir=$subj_dir_absolute/rest/rs_network
-                sed -i "s#DATA#$ica_run1_input#g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
-                sed -i "s#OUTPUT#$OUTPUT_dir#g" $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
-                sed -i "s#REFERENCE_VOL#$reference_vol_for_ica#g" $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf 
-
-                # update fsf to match number of rest volumes
-                sed -i "s/set fmri(npts) 250/set fmri(npts) ${rest_runA_volumes}/g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
-                feat $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf   
-            fi  
         else
-        echo "Continuing with existing RS directory"
-        fi     
+            echo "User chose not to overwrite. Skipping extract_rs_networks step."
+            return 0  # This will exit the current function or script if it's not in a function
+        fi
     fi
-fi
 
+    # The rest of your extract_rs_networks code goes here
+    echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    echo "+ compiling resting state run into analysis folder"
+    expected_volumes=267
+	runstring="Resting state runs should have ${expected_volumes} volumes\n"
+	for i in {0..10};
+	do
+	# Find # of volumes in each run
+	run_volumes=$(find ${subj_dir_absolute}/img/ -type f \( -iname "img-0000${i}*" \) | wc -l)
+	if [ ${run_volumes} -ne 0 ]
+	then
+	    runstring="${runstring}\nRun ${i}: ${run_volumes} volumes"
+	fi
+	done
+
+	# use zenity to allow user to choose which resting volume to use (and how many runs to use)
+	input_string=$(zenity --forms --title="Which resting state runs to use for ICA?" \
+	--separator=" " --width 600 --height 600 \
+	--add-entry="First Input Run #" \
+	--add-entry="Second Input Run #" --text="`printf "${runstring}"`"\
+	--add-combo="`printf "How many resting runs to use for ICA?\nOnly use runs that have 200+ volumes for ICA"`" --combo-values "2 (default) |1 (only to be used if there aren't 2 viable runs to use)")
+
+	# check that exit button hasn't been clicked
+	if [[ $? == 1 ]];
+	then
+	exit 0
+	fi
+
+	# parse zenity output using space as delimiter
+	read -a input_array <<< $input_string
+	rest_runA_num=${input_array[0]}
+	rest_runB_num=${input_array[1]}
+
+	# Use 2 resting runs for ICA
+	echo ${input_array[2]}
+	if [[ ${input_array[2]} == '2' ]] ;
+	then
+	echo "Using run ${rest_runA_num} and run ${rest_runB_num}"
+	echo "Pre-processing images before ICA..."
+
+	# merge individual volumes to make 1 file for each resting state run
+	rest_runA_filename=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold.nii'
+	rest_runB_filename=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold.nii' 
+
+	# Merge all volumes in each run 
+	volsA=$(find ${subj_dir_absolute}/img/ -type f \( -iname "img-0000${rest_runA_num}*" \))
+	volsB=$(find ${subj_dir_absolute}/img/ -type f \( -iname "img-0000${rest_runB_num}*" \)) 
+	fslmerge -tr $rest_runA_filename $volsA ${TR}
+	fslmerge -tr $rest_runB_filename $volsB ${TR}
+
+	# figure out how many volumes of resting state data there were to be used in ICA
+	rest_runA_volumes=$(fslnvols $rest_runA_filename)
+	rest_runB_volumes=$(fslnvols $rest_runB_filename)
+	if [ ${rest_runA_volumes} -ne ${expected_volumes} ] || [ ${rest_runB_volumes} -ne ${expected_volumes} ]; 
+	then
+	    echo "WARNING! ${rest_runA_volumes} volumes of resting-state data found for run 1."
+	    echo "${rest_runB_volumes} volumes of resting-state data found for run 2. ${expected_volumes} expected?"
+
+	    # calculate minimum volumes (which run has fewer, then use fslroi to cut both runs to this minimum)
+	    minvols=$(( rest_runA_volumes < rest_runB_volumes ? rest_runA_volumes : rest_runB_volumes ))
+	    echo "Clipping runs so that both have ${minvols} volumes"
+	    fslroi $rest_runA_filename $rest_runA_filename 0 $minvols
+	    fslroi $rest_runB_filename $rest_runB_filename 0 $minvols
+	else
+	    minvols=$expected_volumes
+	fi
+
+	echo "+ computing resting state networks this will take about 25 minutes"
+	echo "+ started at: $(date)"
+
+	# realign volumes pre-FEAT
+	mcflirt -in $rest_runA_filename -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii'
+	mcflirt -in $rest_runB_filename -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt.nii'
+
+	# get median volume of 1st run
+	fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii' \
+	    -Tmedian $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii'
+
+	# get median volume of 2st run
+	fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt.nii' \
+	    -Tmedian $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_median.nii'
+		
+	# calculate registration matrix of median of 2nd run to median of 1st run
+	flirt -cost leastsq -dof 6  -noresample -noresampblur \
+	    -in $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_median.nii' \
+	    -ref $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
+	    -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run2_median_to_run1_median.nii' \
+	    -omat $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run2_median_to_run1_median.mat' 
+
+
+	# check registration of median of 2nd run to median of 1st run
+	slices $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
+	    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run2_median_to_run1_median.nii' \
+	    -o $subj_dir_absolute/qc/flirt_median_rest_check.gif 
+
+	# use registration matrix previously calculated to warp entire 2nd run to median of 1st run
+	flirt -noresample -noresampblur -interp nearestneighbour \
+	    -in  $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt.nii' \
+	    -ref $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii'  \
+	    -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_run1space.nii' \
+	    -init $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run2_median_to_run1_median.mat' \
+	    -applyxfm
+
+	# skullstrip median of 1st run & check the generated mask
+	bet $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
+	    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii' \
+	    -R -f 0.4 -g 0 -m 
+
+	slices $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
+	    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii' \
+	    -o $subj_dir_absolute/qc/rest_skullstrip_check_run1.gif
+
+	# mask both runs by the mask from skullstriped median of 1st run
+	fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii' \
+	    -mas $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet_mask.nii' \
+	    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_masked.nii'
+
+	fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_run1space.nii' \
+	    -mas $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet_mask.nii' \
+	    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_run1space_masked.nii'
+
+
+
+	ica_run1_input=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_masked.nii'
+	ica_run2_input=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-02_bold_mcflirt_run1space_masked.nii'
+	reference_vol_for_ica=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii'
+
+	# update FEAT template with paths and # of volumes of resting state run
+	cp $fsl_scripts/basic_ica_template.fsf $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
+	OUTPUT_dir=$subj_dir_absolute/rest/rs_network
+	sed -i "s#DATA1#$ica_run1_input#g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
+	sed -i "s#DATA2#$ica_run2_input#g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
+	sed -i "s#OUTPUT#$OUTPUT_dir#g" $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
+	sed -i "s#REFERENCE_VOL#$reference_vol_for_ica#g" $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf 
+
+	# update fsf to match number of rest volumes
+	sed -i "s/set fmri(npts) 250/set fmri(npts) ${minvols}/g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
+	feat $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf        
+	else
+	# Use just a single run for ICA (only to be used when 2 isn't viable)
+	echo "Using run ${rest_runA_num} for single-run ICA"
+
+	# merge individual volumes to make 1 file for each resting state run
+	rest_runA_filename=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold'.nii
+	volsA=$(find ${subj_dir_absolute}/img/ -type f \( -iname "img-0000${rest_runA_num}*" \))
+	fslmerge -tr $rest_runA_filename $volsA ${TR}
+
+	# figure out how many volumes of resting state data there were to be used in ICA
+	rest_runA_volumes=$(fslnvols $rest_runA_filename)
+	echo "${rest_runA_volumes} volumes of resting-state data found for run 1."
+	echo "+ computing resting state networks this will take about 25 minutes"
+	echo "+ started at: $(date)"
+
+	# realign volumes pre-FEAT
+	mcflirt -in $rest_runA_filename -out $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii'
+
+	# get median volume of 1st run
+	fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii' \
+	    -Tmedian $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii'
+
+	# skullstrip median of 1st run & check the generated mask
+	bet $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
+	    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii' \
+	    -R -f 0.4 -g 0 -m 
+
+	slices $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median.nii' \
+	    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii' \
+	    -o $subj_dir_absolute/qc/rest_skullstrip_check_run1.gif
+
+	# mask run1 by the mask from skullstriped median of 1st run
+	fslmaths $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt.nii' \
+	    -mas $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet_mask.nii' \
+	    $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_masked.nii'
+
+	ica_run1_input=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_masked.nii'
+	reference_vol_for_ica=$subj_dir_absolute/rest/$subj'_'$ses'_task-rest_run-01_bold_mcflirt_median_bet.nii'
+
+	# update FEAT template with paths and # of volumes of resting state run
+	cp fsl_scripts/basic_ica_template_single_run.fsf $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
+	OUTPUT_dir=$subj_dir_absolute/rest/rs_network
+	sed -i "s#DATA#$ica_run1_input#g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
+	sed -i "s#OUTPUT#$OUTPUT_dir#g" $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
+	sed -i "s#REFERENCE_VOL#$reference_vol_for_ica#g" $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf 
+
+	# update fsf to match number of rest volumes
+	sed -i "s/set fmri(npts) 250/set fmri(npts) ${rest_runA_volumes}/g" $subj_dir_absolute/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf
+	feat $subj_dir/rest/$subj'_'$ses'_task-rest_'$run'_bold'.fsf  
+	fi
+fi
 
 if [ ${step} = process_roi_masks ]
 then

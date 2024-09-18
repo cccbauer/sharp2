@@ -37,14 +37,41 @@ fi
 # Run selected step
 if [ ${step} == 'create' ]
 then
-	echo "[$(date +%F_%T)] source createxml.sh ${partcipant_id} setup" >> "../subjects/${partcipant_id}/murfi_command_log.txt"
-	source createxml.sh ${partcipant_id} setup 
 
-	
+	#Look if directory already exists
+	subj_dir="../subjects/${partcipant_id}"
+	#echo $subj_dir
+
+
+
+	if [ -d "$subj_dir" ]
+	then
+		# Zenity to prompt the user
+		user_decision=$(zenity --question \
+		--title="Subject Directory Exists" \
+		--text="The directory $subj_dir already exists.\n\n\nDo you want to proceed and overwrite its contents?" \
+		--ok-label="Yes" \
+		--cancel-label="No" \
+		--width 600 \
+		--height 100 \
+		2>/dev/null)
+
+		# Check the exit status of zenity
+		if [ $? -eq 0 ]; then
+			echo "Overwriting existing RS directory..."
+			rm -rf "$subj_dir"
+
+			echo "[$(date +%F_%T)] source createxml.sh ${partcipant_id} setup" >> "../subjects/${partcipant_id}/murfi_command_log.txt"
+			source createxml.sh ${partcipant_id} setup 
+		else
+			continue
+
+		fi
+	fi
 else
 	echo "[$(date +%F_%T)] source feedback_smc.sh ${partcipant_id} ${step}" >> "../subjects/${partcipant_id}/murfi_command_log.txt"
 	source feedback_smc.sh ${partcipant_id} ${step}
-fi
 
+fi
 # Re-launch script to keep MURFI GUI open 
 bash launch_murfi_smc.sh

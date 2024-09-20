@@ -51,8 +51,8 @@ then
 	#ifdown wlan0
 	echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 	echo "checking the presence of scanner and stim computer"
-	#ping -c 3 192.168.2.1
-	#ping -c 3 192.168.2.6
+	ping -c 3 192.168.2.1
+	ping -c 3 192.168.2.6
 	echo "make sure Wi-Fi is off"
 	echo "make sure you are Wired Connected to rt-fMRI"
 	echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
@@ -67,7 +67,7 @@ then
 fi
 
 
-if  [ ${step} = feedback ]
+if [ "$step" = "feedback" ] || [ "$step" = "transfer_pre" ]  || [ "$step" = "transfer_post" ]
 then
 clear
 	echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
@@ -107,7 +107,7 @@ clear
 	echo "ready to receive resting state scan"
 	export MURFI_SUBJECTS_DIR="${absolute_path}/subjects/"
 	export MURFI_SUBJECT_NAME=$subj
-	singularity run murfi2.1.sif murfi -f $subj_dir/xml/experiencesampling_smc.xml
+	singularity run murfi2.1.sif murfi -f $subj_dir/xml/experiencesampling.xml
 
 	fi
 
@@ -450,8 +450,8 @@ then
     fslmaths ${dmn_uthresh} -mul ${dmn2example_func} ${dmn_uthresh}
     fslmaths ${cen_uthresh} -mul ${cen2example_func} ${cen_uthresh}
     fslmaths ${smc_uthresh} -mul ${smc2example_func} ${smc_uthresh}
-    fslmaths ${smcl_uthresh} -mul ${smcl2example_func} ${smcl_uthresh}
-    fslmaths ${smcr_uthresh} -mul ${smcr2example_func} ${smcr_uthresh}
+    fslmaths ${smc_uthresh} -mul ${smcl2example_func} ${smcl_uthresh}
+    fslmaths ${smc_uthresh} -mul ${smcr2example_func} ${smcr_uthresh}
 
     # get number of non-zero voxels in masks, calculate percentile cutofff needed for the desired absolute number of voxels
     voxels_in_dmn=$(fslstats ${dmn_uthresh} -V | awk '{print $1}')
@@ -531,7 +531,7 @@ then
     # Move the latest reference image to be study_ref
     # study_ref.nii is used by MURFI to register to 1st volume of feedback runs
     # So ROI masks need to be in the same space as study_ref.nii
-    echo cp ${latest_ref}.nii ${study_ref}
+    cp ${latest_ref}.nii ${study_ref}
 
     bet ${latest_ref} ${latest_ref}_brain -R -f 0.4 -g 0 -m # changed from -f 0.6
     slices ${latest_ref} ${latest_ref}_brain_mask -o $subj_dir/qc/2vol_skullstrip_brain_mask_check.gif
@@ -594,16 +594,23 @@ then
     xdg-open $subj_dir/qc/rest_warp_to_2vol_native_check.gif
     fsleyes ${latest_ref}_brain  $subj_dir/xfm/epi2reg/rest2studyref_brain $subj_dir/mask/cen.nii -cm red $subj_dir/mask/dmn.nii -cm blue  $subj_dir/mask/smcl.nii -cm yellow $subj_dir/mask/smcr.nii -cm green
 
+    # Randomization of masks
+
+    #echo $subj_dir/xml/rct/rct.txt
+
+    
     # This step moves the appropiate masks A & B to be used for feedbck depending on group asignment (i.e. dmn & cen for real and smcl and smcr for sham)
     # Now, check the content of the rct.txt file
-    if [ "$(cat "${sub_dir}${$subj}/xml/rct/rct.txt")" = "1" ]; then
+    if [ "$(cat "$subj_dir/xml/rct/rct.txt")" = "1" ]; then
         # If the content is 1, perform the file renaming
-        mv "$subj_dir/mask/dmn.nii" "$subj_dir/mask/B.nii"
-        mv "$subj_dir/mask/cen.nii" "$subj_dir/mask/A.nii"
-        echo "Files renamed for subject $subject"
+        cp "$subj_dir/mask/dmn.nii" "$subj_dir/mask/A.nii"
+        cp "$subj_dir/mask/cen.nii" "$subj_dir/mask/B.nii"
+        echo "Randomization applied to masks for subject $subject"
     else
-        mv "$subj_dir/mask/smcl.nii" "$subj_dir/mask/B.nii"
-        mv "$subj_dir/mask/smcl.nii" "$subj_dir/mask/A.nii"
+    # If the content is 0, perform the file renaming
+        cp "$subj_dir/mask/smcr.nii" "$subj_dir/mask/A.nii"
+        cp "$subj_dir/mask/smcl.nii" "$subj_dir/mask/B.nii"
+        echo "Randomization applied to masks for subject $subject"
     fi
 fi
 
@@ -628,63 +635,4 @@ then
     rm -f $subj_dir/rest/*bold.nii
     rm -f $subj_dir/rest/*bold_mcflirt.nii
     rm -f $subj_dir/rest/*bold_mcflirt_masked.nii
-fi
-
-
-# ONLY if regular mask generation isn't possible
-# As a backup, we can register the template masks to 2vol space
-if [ ${step} = backup_reg_mni_masks_to_2vol ]
-then
-    clear
-    mni_template=MNI152_T1_2mm_LPS_brain.nii
-    dmn_mni=DMNax_brainmaskero2_lps.nii
-    cen_mni=CENa_brainmaskero2_lps.nii
-    smc_mni=SMC_brainmaskero2_lps.nii
-
-    two_vol_ref=$(ls -t $subj_dir/xfm/series*.nii | head -n1)
-    two_vol_ref="${two_vol_ref::-4}"
-
-    two_vol_ref_bet=${subj_dir}/xfm/two_vol_ref_bet.nii
-    two_vol_ref2mni=${subj_dir}/xfm/two_vol_ref2mni.nii
-    two_vol_ref2mni_mat=${subj_dir}/xfm/two_vol_ref2mni.mat
-    mni2_two_vol_ref_mat=${subj_dir}/xfm/mni2_two_vol_ref.mat
-
-    study_ref=${subj_dir}/xfm/study_ref.nii
-    # if localizer_ref images doesn't exist yet, make it
-    if [ ! -f ${subj_dir}/xfm/localizer_ref.nii ]
-    then
-        mv ${study_ref} ${subj_dir}/xfm/localizer_ref.nii
-    fi
-    echo "Registering masks to reference image from most recent series: ${two_vol_ref}"
-    echo "study_ref.nii is now ${two_vol_ref}"
-
-    # Move the latest reference image to be study_ref
-    # study_ref.nii is used by MURFI to register to 1st volume of feedback runs
-    # So ROI masks need to be in the same space as study_ref.nii
-    cp ${two_vol_ref}.nii ${study_ref}
-
-
-    # skullstrip 2vol before registration
-    bet ${two_vol_ref} ${two_vol_ref_bet} -R -f 0.4 -g 0 -m # changed from -f 0.6
-
-
-    # first, register the 2vol to mni
-    # then calculate the inverse of the registration
-    flirt -in ${two_vol_ref_bet} -ref ${mni_template} -out ${two_vol_ref2mni} -omat ${two_vol_ref2mni_mat}
-    convert_xfm -omat ${mni2_two_vol_ref_mat} -inverse ${two_vol_ref2mni_mat}
-
-
-    # "apply" the inverse of the registration to dmn/cen masks
-    #put them in the participant mask folder
-
-    #DMN
-    flirt -in ${dmn_mni} -ref ${two_vol_ref_bet} -out $subj_dir/mask/dmn.nii -init ${mni2_two_vol_ref_mat} -applyxfm -interp nearestneighbour -datatype short
-
-    #CEN
-    flirt -in ${cen_mni} -ref ${two_vol_ref_bet} -out $subj_dir/mask/cen.nii -init ${mni2_two_vol_ref_mat} -applyxfm -interp nearestneighbour -datatype short
-    
-    
-    #SMC
-    flirt -in ${smc_mni} -ref ${two_vol_ref_bet} -out $subj_dir/mask/smn.nii -init ${mni2_two_vol_ref_mat} -applyxfm -interp nearestneighbour -datatype short
-
 fi

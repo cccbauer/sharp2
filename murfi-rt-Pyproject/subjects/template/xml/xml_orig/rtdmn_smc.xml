@@ -40,7 +40,7 @@
     <option name="threshold"> 0.5 </option>
 
     <!-- whether to use FSL's brain extraction tool (bet) to find the mask -->
-    <option name="useBet"> false </option>
+    <option name="useAet"> false </option>
 
     <!-- command line paramters to use for bet -->
     <option name="betParms">-f 0.5 -g 0 -n -m</option>
@@ -55,30 +55,6 @@
   </module>
 
   <!-- roi mask loading -->
-
-  <!-- B -->
-  <module name="mask-load">
-    <option name="disabled"> false </option>
-
-    <option name="makeavail">true</option>
-
-    <!-- the roi name this mask can be referenced by in later
-         modules and the data store -->
-    <option name="roiID"> B </option>
-
-    <!-- filename to load the mask from relative to subject mask directory
-         (if present, overrides generation parms below) -->
-    <option name="filename"> B </option>
-
-    <!-- whether to align the mask to the series reference after
-         reading it in -->
-    <option name="align"> true </option>
-
-    <!-- whether to save the mask to a file (good idea) -->
-    <option name="save"> true </option>
-  </module>
-
-  
 
   <!-- A -->
   <module name="mask-load">
@@ -102,8 +78,9 @@
     <option name="save"> true </option>
   </module>
 
+  
 
-  <!-- smcr -->
+  <!-- B -->
   <module name="mask-load">
     <option name="disabled"> false </option>
 
@@ -111,11 +88,11 @@
 
     <!-- the roi name this mask can be referenced by in later
          modules and the data store -->
-    <option name="roiID"> smcr </option>
+    <option name="roiID"> B </option>
 
     <!-- filename to load the mask from relative to subject mask directory
          (if present, overrides generation parms below) -->
-    <option name="filename"> smcr </option>
+    <option name="filename"> B </option>
 
     <!-- whether to align the mask to the series reference after
          reading it in -->
@@ -124,31 +101,8 @@
     <!-- whether to save the mask to a file (good idea) -->
     <option name="save"> true </option>
   </module>
- 
-   <!-- smcl -->
-  <module name="mask-load">
-    <option name="disabled"> false </option>
 
-    <option name="makeavail">true</option>
 
-    <!-- the roi name this mask can be referenced by in later
-         modules and the data store -->
-    <option name="roiID"> smcl </option>
-
-    <!-- filename to load the mask from relative to subject mask directory
-         (if present, overrides generation parms below) -->
-    <option name="filename"> smcl </option>
-
-    <!-- whether to align the mask to the series reference after
-         reading it in -->
-    <option name="align"> true </option>
-
-    <!-- whether to save the mask to a file (good idea) -->
-    <option name="save"> true </option>
-  </module>
- 
- 
- 
  
   <!-- deviation of voxel intensity from expected value  -->
   <module name="incremental-glm">
@@ -213,28 +167,6 @@
 
     <option name="method"> weighted-ave </option>
 
-    <option name="maskRoiID"> B </option>
-
-    <option name="inputModuleID"> current-activation </option>
-    <option name="inputDataName"> activation-img </option>
-    <option name="inputRoiID"> brain </option>
-
-    <option name="weightModuleID"> incremental-glm </option>
-    <option name="weightDataName"> residual_mse-img </option>
-  </module>
-
-
-  <module name="roi-combine">
-    <output> infoserver </output>
-    <output>display</output>
-
-    <option name="disabled"> false </option>
-    <option name="print"> true </option>
-
-    <option name="makeavail">true</option>
-
-    <option name="method"> weighted-ave </option>
-
     <option name="maskRoiID"> A </option>
 
     <option name="inputModuleID"> current-activation </option>
@@ -257,7 +189,7 @@
 
     <option name="method"> weighted-ave </option>
 
-    <option name="maskRoiID"> smcr </option>
+    <option name="maskRoiID"> B </option>
 
     <option name="inputModuleID"> current-activation </option>
     <option name="inputDataName"> activation-img </option>
@@ -267,25 +199,4 @@
     <option name="weightDataName"> residual_mse-img </option>
   </module>
 
-
-  <module name="roi-combine">
-    <output> infoserver </output>
-    <output>display</output>
-
-    <option name="disabled"> false </option>
-    <option name="print"> true </option>
-
-    <option name="makeavail">true</option>
-
-    <option name="method"> weighted-ave </option>
-
-    <option name="maskRoiID"> smcl </option>
-
-    <option name="inputModuleID"> current-activation </option>
-    <option name="inputDataName"> activation-img </option>
-    <option name="inputRoiID"> brain </option>
-
-    <option name="weightModuleID"> incremental-glm </option>
-    <option name="weightDataName"> residual_mse-img </option>
-  </module>
 </processor>

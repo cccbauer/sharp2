@@ -40,7 +40,7 @@
     <option name="threshold"> 0.5 </option>
 
     <!-- whether to use FSL's brain extraction tool (bet) to find the mask -->
-    <option name="useBet"> false </option>
+    <option name="usedmnet"> false </option>
 
     <!-- command line paramters to use for bet -->
     <option name="betParms">-f 0.5 -g 0 -n -m</option>
@@ -56,7 +56,7 @@
 
   <!-- roi mask loading -->
 
-  <!-- B -->
+  <!-- dmn -->
   <module name="mask-load">
     <option name="disabled"> false </option>
 
@@ -64,11 +64,11 @@
 
     <!-- the roi name this mask can be referenced by in later
          modules and the data store -->
-    <option name="roiID"> B </option>
+    <option name="roiID"> dmn </option>
 
     <!-- filename to load the mask from relative to subject mask directory
          (if present, overrides generation parms below) -->
-    <option name="filename"> B </option>
+    <option name="filename"> dmn </option>
 
     <!-- whether to align the mask to the series reference after
          reading it in -->
@@ -80,7 +80,7 @@
 
   
 
-  <!-- A -->
+  <!-- cen -->
   <module name="mask-load">
     <option name="disabled"> false </option>
 
@@ -88,11 +88,11 @@
 
     <!-- the roi name this mask can be referenced by in later
          modules and the data store -->
-    <option name="roiID"> A </option>
+    <option name="roiID"> cen </option>
 
     <!-- filename to load the mask from relative to subject mask directory
          (if present, overrides generation parms below) -->
-    <option name="filename"> A </option>
+    <option name="filename"> cen </option>
 
     <!-- whether to align the mask to the series reference after
          reading it in -->
@@ -173,7 +173,7 @@
 
     <option name="method"> weighted-ave </option>
 
-    <option name="maskRoiID"> B </option>
+    <option name="maskRoiID"> dmn </option>
 
     <option name="inputModuleID"> current-activation </option>
     <option name="inputDataName"> activation-img </option>
@@ -195,7 +195,7 @@
 
     <option name="method"> weighted-ave </option>
 
-    <option name="maskRoiID"> A </option>
+    <option name="maskRoiID"> cen </option>
 
     <option name="inputModuleID"> current-activation </option>
     <option name="inputDataName"> activation-img </option>

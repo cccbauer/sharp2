@@ -1,0 +1,4 @@
+
+/bin/cp /home/tosa/sharp2/murfi-rt-Pyproject/scripts/../subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold.fsf design.fsf
+
+mkdir .files;cp /home/tosa/fsl/doc/fsl.css .files;cp -r /home/tosa/fsl/doc/images .files/images

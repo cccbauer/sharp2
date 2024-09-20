@@ -1,7 +1,7 @@
 ################################################################
 
 # realtime system log file
-created 2024/9/17 20:53:9.951631
+created 2024/9/19 12:4:6.325999
 
 configured the mosaic
 configuration:
@@ -56,14 +56,14 @@ configuration:
       + log
 --------------
 
-initialization completed at 2024/9/17 20:53:9.951990
-began running at 2024/9/17 20:53:9.952077
+initialization completed at 2024/9/19 12:4:6.326360
+began running at 2024/9/19 12:4:6.326463
 received image from scanner: series 1 acquisition 1
 received image from scanner: series 0 acquisition 2
 ################################################################
 
 # realtime system log file
-created 2024/9/17 20:53:46.778314
+created 2024/9/19 12:4:44.601112
 
 configured the mosaic
 configured the mask-gen
@@ -314,8 +314,8 @@ configuration:
       + residual_mse-img
 --------------
 
-initialization completed at 2024/9/17 20:53:46.787047
-began running at 2024/9/17 20:53:46.787116
+initialization completed at 2024/9/19 12:4:44.629863
+began running at 2024/9/19 12:4:44.629975
 received image from scanner: series 2 acquisition 1
 maskgen: produced mask brain of 284947 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series2_brain.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
@@ -737,87 +737,3258 @@ error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask
 error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
 RtIncrementalGLM: done at tr 60
 RtCurrentActivation::process: residual is NULL at tr 60
-received image from scanner: series 1 acquisition 61
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:5:47.729363
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configured the roi-combine
+configured the roi-combine
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.250
+  + option
+    + name=measurements
+    + 300
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + true
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=usedmnet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + dmn
+    + option
+      + name=filename
+      + dmn
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + cen
+    + option
+      + name=filename
+      + cen
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 25
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 25
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + dmn
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + cen
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+initialization completed at 2024/9/19 14:5:47.757557
+began running at 2024/9/19 14:5:47.757680
+received image from scanner: series 3 acquisition 1
+maskgen: produced mask brain of 284947 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series3_brain.nii
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/dmn , just using unaligned version.
+maskload: loaded mask dmn of 1993 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series3_dmn.nii
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/cen , just using unaligned version.
+maskload: loaded mask cen of 2000 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series3_cen.nii
+RtIncrementalGLM: done at tr 1
+RtCurrentActivation: done at tr 1
+RtRoiCombine: dmn at tr 1 result is: 0
+RtRoiCombine: cen at tr 1 result is: 0
+received image from scanner: series 2 acquisition 2
+RtIncrementalGLM: done at tr 2
+RtCurrentActivation: done at tr 2
+RtRoiCombine: dmn at tr 2 result is: 0
+RtRoiCombine: cen at tr 2 result is: 0
+received image from scanner: series 2 acquisition 3
+RtIncrementalGLM: done at tr 3
+RtCurrentActivation: done at tr 3
+RtRoiCombine: dmn at tr 3 result is: 0.0667116
+RtRoiCombine: cen at tr 3 result is: 0.278205
+received image from scanner: series 2 acquisition 4
+RtIncrementalGLM: done at tr 4
+RtCurrentActivation: done at tr 4
+RtRoiCombine: dmn at tr 4 result is: 0.276005
+RtRoiCombine: cen at tr 4 result is: 0.124879
+received image from scanner: series 2 acquisition 5
+RtIncrementalGLM: done at tr 5
+RtCurrentActivation: done at tr 5
+RtRoiCombine: dmn at tr 5 result is: 0.0824504
+RtRoiCombine: cen at tr 5 result is: 0.0457177
+received image from scanner: series 2 acquisition 6
+RtIncrementalGLM: done at tr 6
+RtCurrentActivation: done at tr 6
+RtRoiCombine: dmn at tr 6 result is: -0.0658018
+RtRoiCombine: cen at tr 6 result is: 0.0149321
+received image from scanner: series 2 acquisition 7
+RtIncrementalGLM: done at tr 7
+RtCurrentActivation: done at tr 7
+RtRoiCombine: dmn at tr 7 result is: -0.217886
+RtRoiCombine: cen at tr 7 result is: 0.121661
+received image from scanner: series 2 acquisition 8
+RtIncrementalGLM: done at tr 8
+RtCurrentActivation: done at tr 8
+RtRoiCombine: dmn at tr 8 result is: 0.0482913
+RtRoiCombine: cen at tr 8 result is: 0.296847
+received image from scanner: series 2 acquisition 9
+RtIncrementalGLM: done at tr 9
+RtCurrentActivation: done at tr 9
+RtRoiCombine: dmn at tr 9 result is: 0.142155
+RtRoiCombine: cen at tr 9 result is: 0.193295
+received image from scanner: series 2 acquisition 10
+RtIncrementalGLM: done at tr 10
+RtCurrentActivation: done at tr 10
+RtRoiCombine: dmn at tr 10 result is: 0.1831
+RtRoiCombine: cen at tr 10 result is: 0.0495815
+received image from scanner: series 2 acquisition 11
+RtIncrementalGLM: done at tr 11
+RtCurrentActivation: done at tr 11
+RtRoiCombine: dmn at tr 11 result is: 0.028051
+RtRoiCombine: cen at tr 11 result is: 0.00828602
+received image from scanner: series 2 acquisition 12
+RtIncrementalGLM: done at tr 12
+RtCurrentActivation: done at tr 12
+RtRoiCombine: dmn at tr 12 result is: -0.135628
+RtRoiCombine: cen at tr 12 result is: 0.146961
+received image from scanner: series 2 acquisition 13
+RtIncrementalGLM: done at tr 13
+RtCurrentActivation: done at tr 13
+RtRoiCombine: dmn at tr 13 result is: 0.0942664
+RtRoiCombine: cen at tr 13 result is: 0.315451
+received image from scanner: series 2 acquisition 14
+RtIncrementalGLM: done at tr 14
+RtCurrentActivation: done at tr 14
+RtRoiCombine: dmn at tr 14 result is: 0.126406
+RtRoiCombine: cen at tr 14 result is: 0.146125
+received image from scanner: series 2 acquisition 15
+RtIncrementalGLM: done at tr 15
+RtCurrentActivation: done at tr 15
+RtRoiCombine: dmn at tr 15 result is: 0.0691225
+RtRoiCombine: cen at tr 15 result is: -0.0521972
+received image from scanner: series 2 acquisition 16
+RtIncrementalGLM: done at tr 16
+RtCurrentActivation: done at tr 16
+RtRoiCombine: dmn at tr 16 result is: -0.161291
+RtRoiCombine: cen at tr 16 result is: -0.116392
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:6:54.693146
+
+configured the mosaic
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 10
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + false
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+--------------
+
+initialization completed at 2024/9/19 14:6:54.693515
+began running at 2024/9/19 14:6:54.693608
+received image from scanner: series 4 acquisition 1
+received image from scanner: series 3 acquisition 2
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:8:30.776813
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configured the roi-combine
+configured the roi-combine
+configured the roi-combine
+configured the roi-combine
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 150
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + true
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=useBet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + B
+    + option
+      + name=filename
+      + B
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + A
+    + option
+      + name=filename
+      + A
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + smcr
+    + option
+      + name=filename
+      + smcr
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + smcl
+    + option
+      + name=filename
+      + smcl
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 25
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 25
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + B
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + A
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + smcr
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + smcl
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+initialization completed at 2024/9/19 14:8:30.783668
+began running at 2024/9/19 14:8:30.783780
+received image from scanner: series 5 acquisition 1
+maskgen: produced mask brain of 284947 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series5_brain.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+maskload: loaded mask B of 1993 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series5_B.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 61
-RtCurrentActivation::process: residual is NULL at tr 61
-received image from scanner: series 1 acquisition 62
+maskload: loaded mask A of 2000 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series5_A.nii
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/smcr , just using unaligned version.
+maskload: loaded mask smcr of 1840 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series5_smcr.nii
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/smcl , just using unaligned version.
+maskload: loaded mask smcl of 1880 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series5_smcl.nii
+RtIncrementalGLM: done at tr 1
+RtCurrentActivation: done at tr 1
+RtRoiCombine: B at tr 1 result is: 0
+RtRoiCombine: A at tr 1 result is: 0
+RtRoiCombine: smcr at tr 1 result is: 0
+RtRoiCombine: smcl at tr 1 result is: 0
+received image from scanner: series 4 acquisition 2
+RtIncrementalGLM: done at tr 2
+RtCurrentActivation: done at tr 2
+RtRoiCombine: B at tr 2 result is: 0
+RtRoiCombine: A at tr 2 result is: 0
+RtRoiCombine: smcr at tr 2 result is: 0
+RtRoiCombine: smcl at tr 2 result is: 0
+received image from scanner: series 4 acquisition 3
+RtIncrementalGLM: done at tr 3
+RtCurrentActivation: done at tr 3
+RtRoiCombine: B at tr 3 result is: 0.0667116
+RtRoiCombine: A at tr 3 result is: 0.278205
+RtRoiCombine: smcr at tr 3 result is: 0.0362144
+RtRoiCombine: smcl at tr 3 result is: 0.0386524
+received image from scanner: series 4 acquisition 4
+RtIncrementalGLM: done at tr 4
+RtCurrentActivation: done at tr 4
+RtRoiCombine: B at tr 4 result is: 0.276005
+RtRoiCombine: A at tr 4 result is: 0.124879
+RtRoiCombine: smcr at tr 4 result is: 0.119217
+RtRoiCombine: smcl at tr 4 result is: 0.16207
+received image from scanner: series 4 acquisition 5
+RtIncrementalGLM: done at tr 5
+RtCurrentActivation: done at tr 5
+RtRoiCombine: B at tr 5 result is: 0.0824504
+RtRoiCombine: A at tr 5 result is: 0.0457177
+RtRoiCombine: smcr at tr 5 result is: 0.233379
+RtRoiCombine: smcl at tr 5 result is: 0.209909
+received image from scanner: series 4 acquisition 6
+RtIncrementalGLM: done at tr 6
+RtCurrentActivation: done at tr 6
+RtRoiCombine: B at tr 6 result is: -0.0658018
+RtRoiCombine: A at tr 6 result is: 0.0149321
+RtRoiCombine: smcr at tr 6 result is: 0.301907
+RtRoiCombine: smcl at tr 6 result is: 0.28895
+received image from scanner: series 4 acquisition 7
+RtIncrementalGLM: done at tr 7
+RtCurrentActivation: done at tr 7
+RtRoiCombine: B at tr 7 result is: -0.217886
+RtRoiCombine: A at tr 7 result is: 0.121661
+RtRoiCombine: smcr at tr 7 result is: 0.246015
+RtRoiCombine: smcl at tr 7 result is: 0.25648
+received image from scanner: series 4 acquisition 8
+RtIncrementalGLM: done at tr 8
+RtCurrentActivation: done at tr 8
+RtRoiCombine: B at tr 8 result is: 0.0482913
+RtRoiCombine: A at tr 8 result is: 0.296847
+RtRoiCombine: smcr at tr 8 result is: 0.100685
+RtRoiCombine: smcl at tr 8 result is: 0.0973702
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:13:37.456470
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configured the roi-combine
+configured the roi-combine
+configured the roi-combine
+configured the roi-combine
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 150
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + true
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=useBet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + B
+    + option
+      + name=filename
+      + B
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + A
+    + option
+      + name=filename
+      + A
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + smcr
+    + option
+      + name=filename
+      + smcr
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + smcl
+    + option
+      + name=filename
+      + smcl
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 25
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 25
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + B
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + A
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + smcr
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + smcl
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:14:40.206907
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configured the roi-combine
+configured the roi-combine
+configured the roi-combine
+configured the roi-combine
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 150
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + true
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=useBet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + B
+    + option
+      + name=filename
+      + B
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + A
+    + option
+      + name=filename
+      + A
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + smcr
+    + option
+      + name=filename
+      + smcr
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + smcl
+    + option
+      + name=filename
+      + smcl
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 25
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 25
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + B
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + A
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + smcr
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + smcl
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:15:59.963903
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configured the roi-combine
+configured the roi-combine
+configured the roi-combine
+configured the roi-combine
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 150
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + true
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=useBet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + B
+    + option
+      + name=filename
+      + B
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + A
+    + option
+      + name=filename
+      + A
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + smcr
+    + option
+      + name=filename
+      + smcr
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + smcl
+    + option
+      + name=filename
+      + smcl
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 25
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 25
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + B
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + A
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + smcr
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + smcl
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+initialization completed at 2024/9/19 14:15:59.971384
+began running at 2024/9/19 14:15:59.971451
+received image from scanner: series 6 acquisition 1
+maskgen: produced mask brain of 284947 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series6_brain.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+maskload: loaded mask B of 1993 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series6_B.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 62
-RtCurrentActivation::process: residual is NULL at tr 62
-received image from scanner: series 1 acquisition 63
+maskload: loaded mask A of 2000 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series6_A.nii
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/smcr , just using unaligned version.
+maskload: loaded mask smcr of 1840 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series6_smcr.nii
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/smcl , just using unaligned version.
+maskload: loaded mask smcl of 1880 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series6_smcl.nii
+RtIncrementalGLM: done at tr 1
+RtCurrentActivation: done at tr 1
+RtRoiCombine: B at tr 1 result is: 0
+RtRoiCombine: A at tr 1 result is: 0
+RtRoiCombine: smcr at tr 1 result is: 0
+RtRoiCombine: smcl at tr 1 result is: 0
+received image from scanner: series 5 acquisition 2
+RtIncrementalGLM: done at tr 2
+RtCurrentActivation: done at tr 2
+RtRoiCombine: B at tr 2 result is: 0
+RtRoiCombine: A at tr 2 result is: 0
+RtRoiCombine: smcr at tr 2 result is: 0
+RtRoiCombine: smcl at tr 2 result is: 0
+received image from scanner: series 5 acquisition 3
+RtIncrementalGLM: done at tr 3
+RtCurrentActivation: done at tr 3
+RtRoiCombine: B at tr 3 result is: 0.0667116
+RtRoiCombine: A at tr 3 result is: 0.278205
+RtRoiCombine: smcr at tr 3 result is: 0.0362144
+RtRoiCombine: smcl at tr 3 result is: 0.0386524
+received image from scanner: series 5 acquisition 4
+RtIncrementalGLM: done at tr 4
+RtCurrentActivation: done at tr 4
+RtRoiCombine: B at tr 4 result is: 0.276005
+RtRoiCombine: A at tr 4 result is: 0.124879
+RtRoiCombine: smcr at tr 4 result is: 0.119217
+RtRoiCombine: smcl at tr 4 result is: 0.16207
+received image from scanner: series 5 acquisition 5
+RtIncrementalGLM: done at tr 5
+RtCurrentActivation: done at tr 5
+RtRoiCombine: B at tr 5 result is: 0.0824504
+RtRoiCombine: A at tr 5 result is: 0.0457177
+RtRoiCombine: smcr at tr 5 result is: 0.233379
+RtRoiCombine: smcl at tr 5 result is: 0.209909
+received image from scanner: series 5 acquisition 6
+RtIncrementalGLM: done at tr 6
+RtCurrentActivation: done at tr 6
+RtRoiCombine: B at tr 6 result is: -0.0658018
+RtRoiCombine: A at tr 6 result is: 0.0149321
+RtRoiCombine: smcr at tr 6 result is: 0.301907
+RtRoiCombine: smcl at tr 6 result is: 0.28895
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:17:35.174736
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configured the roi-combine
+configured the roi-combine
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 150
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + true
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=useBet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + B
+    + option
+      + name=filename
+      + B
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + A
+    + option
+      + name=filename
+      + A
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 25
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 25
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + B
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + A
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+initialization completed at 2024/9/19 14:17:35.181320
+began running at 2024/9/19 14:17:35.181437
+received image from scanner: series 7 acquisition 1
+maskgen: produced mask brain of 284947 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series7_brain.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+maskload: loaded mask B of 1993 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series7_B.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 63
-RtCurrentActivation::process: residual is NULL at tr 63
-received image from scanner: series 1 acquisition 64
+maskload: loaded mask A of 2000 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series7_A.nii
+RtIncrementalGLM: done at tr 1
+RtCurrentActivation: done at tr 1
+RtRoiCombine: B at tr 1 result is: 0
+RtRoiCombine: A at tr 1 result is: 0
+received image from scanner: series 6 acquisition 2
+RtIncrementalGLM: done at tr 2
+RtCurrentActivation: done at tr 2
+RtRoiCombine: B at tr 2 result is: 0
+RtRoiCombine: A at tr 2 result is: 0
+received image from scanner: series 6 acquisition 3
+RtIncrementalGLM: done at tr 3
+RtCurrentActivation: done at tr 3
+RtRoiCombine: B at tr 3 result is: 0.0667116
+RtRoiCombine: A at tr 3 result is: 0.278205
+received image from scanner: series 6 acquisition 4
+RtIncrementalGLM: done at tr 4
+RtCurrentActivation: done at tr 4
+RtRoiCombine: B at tr 4 result is: 0.276005
+RtRoiCombine: A at tr 4 result is: 0.124879
+received image from scanner: series 6 acquisition 5
+RtIncrementalGLM: done at tr 5
+RtCurrentActivation: done at tr 5
+RtRoiCombine: B at tr 5 result is: 0.0824504
+RtRoiCombine: A at tr 5 result is: 0.0457177
+received image from scanner: series 6 acquisition 6
+RtIncrementalGLM: done at tr 6
+RtCurrentActivation: done at tr 6
+RtRoiCombine: B at tr 6 result is: -0.0658018
+RtRoiCombine: A at tr 6 result is: 0.0149321
+received image from scanner: series 6 acquisition 7
+RtIncrementalGLM: done at tr 7
+RtCurrentActivation: done at tr 7
+RtRoiCombine: B at tr 7 result is: -0.217886
+RtRoiCombine: A at tr 7 result is: 0.121661
+received image from scanner: series 6 acquisition 8
+RtIncrementalGLM: done at tr 8
+RtCurrentActivation: done at tr 8
+RtRoiCombine: B at tr 8 result is: 0.0482913
+RtRoiCombine: A at tr 8 result is: 0.296847
+received image from scanner: series 6 acquisition 9
+RtIncrementalGLM: done at tr 9
+RtCurrentActivation: done at tr 9
+RtRoiCombine: B at tr 9 result is: 0.142155
+RtRoiCombine: A at tr 9 result is: 0.193295
+received image from scanner: series 6 acquisition 10
+RtIncrementalGLM: done at tr 10
+RtCurrentActivation: done at tr 10
+RtRoiCombine: B at tr 10 result is: 0.1831
+RtRoiCombine: A at tr 10 result is: 0.0495815
+received image from scanner: series 6 acquisition 11
+RtIncrementalGLM: done at tr 11
+RtCurrentActivation: done at tr 11
+RtRoiCombine: B at tr 11 result is: 0.028051
+RtRoiCombine: A at tr 11 result is: 0.00828602
+received image from scanner: series 6 acquisition 12
+RtIncrementalGLM: done at tr 12
+RtCurrentActivation: done at tr 12
+RtRoiCombine: B at tr 12 result is: -0.135628
+RtRoiCombine: A at tr 12 result is: 0.146961
+received image from scanner: series 6 acquisition 13
+RtIncrementalGLM: done at tr 13
+RtCurrentActivation: done at tr 13
+RtRoiCombine: B at tr 13 result is: 0.0942664
+RtRoiCombine: A at tr 13 result is: 0.315451
+received image from scanner: series 6 acquisition 14
+RtIncrementalGLM: done at tr 14
+RtCurrentActivation: done at tr 14
+RtRoiCombine: B at tr 14 result is: 0.126406
+RtRoiCombine: A at tr 14 result is: 0.146125
+received image from scanner: series 6 acquisition 15
+RtIncrementalGLM: done at tr 15
+RtCurrentActivation: done at tr 15
+RtRoiCombine: B at tr 15 result is: 0.0691225
+RtRoiCombine: A at tr 15 result is: -0.0521972
+received image from scanner: series 6 acquisition 16
+RtIncrementalGLM: done at tr 16
+RtCurrentActivation: done at tr 16
+RtRoiCombine: B at tr 16 result is: -0.161291
+RtRoiCombine: A at tr 16 result is: -0.116392
+received image from scanner: series 6 acquisition 17
+RtIncrementalGLM: done at tr 17
+RtCurrentActivation: done at tr 17
+RtRoiCombine: B at tr 17 result is: -0.236742
+RtRoiCombine: A at tr 17 result is: -0.00710682
+received image from scanner: series 6 acquisition 18
+RtIncrementalGLM: done at tr 18
+RtCurrentActivation: done at tr 18
+RtRoiCombine: B at tr 18 result is: 0.202423
+RtRoiCombine: A at tr 18 result is: 0.366769
+received image from scanner: series 6 acquisition 19
+RtIncrementalGLM: done at tr 19
+RtCurrentActivation: done at tr 19
+RtRoiCombine: B at tr 19 result is: 0.0918882
+RtRoiCombine: A at tr 19 result is: 0.00178947
+received image from scanner: series 6 acquisition 20
+RtIncrementalGLM: done at tr 20
+RtCurrentActivation: done at tr 20
+RtRoiCombine: B at tr 20 result is: -0.111766
+RtRoiCombine: A at tr 20 result is: -0.0945482
+received image from scanner: series 6 acquisition 21
+RtIncrementalGLM: done at tr 21
+RtCurrentActivation: done at tr 21
+RtRoiCombine: B at tr 21 result is: -0.21984
+RtRoiCombine: A at tr 21 result is: -0.0610397
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:18:17.407635
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configured the roi-combine
+configured the roi-combine
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 150
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + true
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=useBet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + B
+    + option
+      + name=filename
+      + B
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + A
+    + option
+      + name=filename
+      + A
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 25
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 25
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + B
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + A
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+initialization completed at 2024/9/19 14:18:17.413876
+began running at 2024/9/19 14:18:17.413937
+received image from scanner: series 8 acquisition 1
+maskgen: produced mask brain of 284947 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series8_brain.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+maskload: loaded mask B of 1993 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series8_B.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 64
-RtCurrentActivation::process: residual is NULL at tr 64
-received image from scanner: series 1 acquisition 65
+maskload: loaded mask A of 2000 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series8_A.nii
+RtIncrementalGLM: done at tr 1
+RtCurrentActivation: done at tr 1
+RtRoiCombine: B at tr 1 result is: 0
+RtRoiCombine: A at tr 1 result is: 0
+received image from scanner: series 7 acquisition 2
+RtIncrementalGLM: done at tr 2
+RtCurrentActivation: done at tr 2
+RtRoiCombine: B at tr 2 result is: 0
+RtRoiCombine: A at tr 2 result is: 0
+received image from scanner: series 7 acquisition 3
+RtIncrementalGLM: done at tr 3
+RtCurrentActivation: done at tr 3
+RtRoiCombine: B at tr 3 result is: 0.0667116
+RtRoiCombine: A at tr 3 result is: 0.278205
+received image from scanner: series 7 acquisition 4
+RtIncrementalGLM: done at tr 4
+RtCurrentActivation: done at tr 4
+RtRoiCombine: B at tr 4 result is: 0.276005
+RtRoiCombine: A at tr 4 result is: 0.124879
+received image from scanner: series 7 acquisition 5
+RtIncrementalGLM: done at tr 5
+RtCurrentActivation: done at tr 5
+RtRoiCombine: B at tr 5 result is: 0.0824504
+RtRoiCombine: A at tr 5 result is: 0.0457177
+received image from scanner: series 7 acquisition 6
+RtIncrementalGLM: done at tr 6
+RtCurrentActivation: done at tr 6
+RtRoiCombine: B at tr 6 result is: -0.0658018
+RtRoiCombine: A at tr 6 result is: 0.0149321
+received image from scanner: series 7 acquisition 7
+RtIncrementalGLM: done at tr 7
+RtCurrentActivation: done at tr 7
+RtRoiCombine: B at tr 7 result is: -0.217886
+RtRoiCombine: A at tr 7 result is: 0.121661
+received image from scanner: series 7 acquisition 8
+RtIncrementalGLM: done at tr 8
+RtCurrentActivation: done at tr 8
+RtRoiCombine: B at tr 8 result is: 0.0482913
+RtRoiCombine: A at tr 8 result is: 0.296847
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:20:6.875999
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configured the roi-combine
+configured the roi-combine
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 150
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + true
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=useAet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + A
+    + option
+      + name=filename
+      + A
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + B
+    + option
+      + name=filename
+      + B
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 25
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 25
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + A
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + B
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+initialization completed at 2024/9/19 14:20:6.882824
+began running at 2024/9/19 14:20:6.882964
+received image from scanner: series 9 acquisition 1
+maskgen: produced mask brain of 284947 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series9_brain.nii
+error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
+maskload: loaded mask A of 2000 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series9_A.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
+maskload: loaded mask B of 1993 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series9_B.nii
+RtIncrementalGLM: done at tr 1
+RtCurrentActivation: done at tr 1
+RtRoiCombine: A at tr 1 result is: 0
+RtRoiCombine: B at tr 1 result is: 0
+received image from scanner: series 8 acquisition 2
+RtIncrementalGLM: done at tr 2
+RtCurrentActivation: done at tr 2
+RtRoiCombine: A at tr 2 result is: 0
+RtRoiCombine: B at tr 2 result is: 0
+received image from scanner: series 8 acquisition 3
+RtIncrementalGLM: done at tr 3
+RtCurrentActivation: done at tr 3
+RtRoiCombine: A at tr 3 result is: 0.278205
+RtRoiCombine: B at tr 3 result is: 0.0667116
+received image from scanner: series 8 acquisition 4
+RtIncrementalGLM: done at tr 4
+RtCurrentActivation: done at tr 4
+RtRoiCombine: A at tr 4 result is: 0.124879
+RtRoiCombine: B at tr 4 result is: 0.276005
+################################################################
+
+# realtime system log file
+created 2024/9/19 14:21:44.422014
+
+configured the mosaic
+configured the mask-gen
+configured the mask-load
+configured the mask-load
+configured the incremental-glm
+configured the current-activation
+configured the roi-combine
+configured the roi-combine
+configuration:
+--------------
++ study
+  + name=rtDMN
+  + option
+    + name=softwareDir
+    + /opt/murfi/
+  + log
+    + filename=/home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/log/log.rtl
+  + xfm
+    + referenceVol=study_ref.
++ scanner
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=tr
+    + 1.3
+  + option
+    + name=measurements
+    + 150
+  + option
+    + name=port
+    + 15000
+  + option
+    + name=saveImages
+    + true
+  + option
+    + name=receiveImages
+    + true
+  + option
+    + name=onlyReadMoCo
+    + true
++ infoserver
+  + option
+    + name=disabled
+    + false
+  + option
+    + name=port
+    + 15001
++ processor
+  + module
+    + name=mosaic
+    + option
+      + name=disabled
+      + false
+    + output
+      + display
+    + output
+      + log
+  + module
+    + name=mask-gen
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + brain
+    + option
+      + name=threshold
+      + 0.5
+    + option
+      + name=useAet
+      + false
+    + option
+      + name=betParms
+      + -f 0.5 -g 0 -n -m
+    + option
+      + name=dynamic
+      + false
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + A
+    + option
+      + name=filename
+      + A
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=mask-load
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=roiID
+      + B
+    + option
+      + name=filename
+      + B
+    + option
+      + name=align
+      + true
+    + option
+      + name=save
+      + true
+  + module
+    + name=incremental-glm
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + output
+      + display
+    + option
+      + name=maskRoiID
+      + brain
+    + design
+      + option
+        + name=disabled
+        + false
+      + option
+        + name=modelMotionDerivatives
+        + true
+      + option
+        + name=maxTrendOrder
+        + 1
+      + option
+        + name=condition
+        + conditionName=Regulation
+        + 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+      + option
+        + name=conditionShift
+        + 25
+  + module
+    + name=current-activation
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=print
+      + true
+    + option
+      + name=modelFitModuleID
+      + incremental-glm
+    + option
+      + name=modelFitRoiID
+      + brain
+    + option
+      + name=maskRoiID
+      + brain
+    + option
+      + name=numDataPointsForErrEst
+      + 25
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + A
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+  + module
+    + name=roi-combine
+    + output
+      + infoserver
+    + output
+      + display
+    + option
+      + name=disabled
+      + false
+    + option
+      + name=print
+      + true
+    + option
+      + name=makeavail
+      + true
+    + option
+      + name=method
+      + weighted-ave
+    + option
+      + name=maskRoiID
+      + B
+    + option
+      + name=inputModuleID
+      + current-activation
+    + option
+      + name=inputDataName
+      + activation-img
+    + option
+      + name=inputRoiID
+      + brain
+    + option
+      + name=weightModuleID
+      + incremental-glm
+    + option
+      + name=weightDataName
+      + residual_mse-img
+--------------
+
+initialization completed at 2024/9/19 14:21:44.428682
+began running at 2024/9/19 14:21:44.428757
+received image from scanner: series 10 acquisition 1
+maskgen: produced mask brain of 284947 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series10_brain.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 65
-RtCurrentActivation::process: residual is NULL at tr 65
-received image from scanner: series 1 acquisition 66
+maskload: loaded mask A of 1993 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series10_A.nii
 error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 66
-RtCurrentActivation::process: residual is NULL at tr 66
-received image from scanner: series 1 acquisition 67
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 67
-RtCurrentActivation::process: residual is NULL at tr 67
-received image from scanner: series 1 acquisition 68
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 68
-RtCurrentActivation::process: residual is NULL at tr 68
-received image from scanner: series 1 acquisition 69
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 69
-RtCurrentActivation::process: residual is NULL at tr 69
-received image from scanner: series 1 acquisition 70
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 70
-RtCurrentActivation::process: residual is NULL at tr 70
-received image from scanner: series 1 acquisition 71
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 71
-RtCurrentActivation::process: residual is NULL at tr 71
-received image from scanner: series 1 acquisition 72
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/B
-error aligning mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A , just using unaligned version.
-error loading mask file from /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/A
-RtIncrementalGLM: done at tr 72
-RtCurrentActivation::process: residual is NULL at tr 72
+maskload: loaded mask B of 2000 voxels and saved to /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2999/mask/series10_B.nii
+RtIncrementalGLM: done at tr 1
+RtCurrentActivation: done at tr 1
+RtRoiCombine: A at tr 1 result is: 0
+RtRoiCombine: B at tr 1 result is: 0
+received image from scanner: series 9 acquisition 2
+RtIncrementalGLM: done at tr 2
+RtCurrentActivation: done at tr 2
+RtRoiCombine: A at tr 2 result is: 0
+RtRoiCombine: B at tr 2 result is: 0
+received image from scanner: series 9 acquisition 3
+RtIncrementalGLM: done at tr 3
+RtCurrentActivation: done at tr 3
+RtRoiCombine: A at tr 3 result is: 0.0667116
+RtRoiCombine: B at tr 3 result is: 0.278205
+received image from scanner: series 9 acquisition 4
+RtIncrementalGLM: done at tr 4
+RtCurrentActivation: done at tr 4
+RtRoiCombine: A at tr 4 result is: 0.276005
+RtRoiCombine: B at tr 4 result is: 0.124879
+received image from scanner: series 9 acquisition 5
+RtIncrementalGLM: done at tr 5
+RtCurrentActivation: done at tr 5
+RtRoiCombine: A at tr 5 result is: 0.0824504
+RtRoiCombine: B at tr 5 result is: 0.0457177

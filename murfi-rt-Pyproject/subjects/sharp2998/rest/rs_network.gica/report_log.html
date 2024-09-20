@@ -1,0 +1,221 @@
+<HTML><HEAD>
+<!--refreshstart-->
+
+<!--refreshstop-->
+<link REL=stylesheet TYPE=text/css href=.files/fsl.css>
+<TITLE>FSL</TITLE></HEAD><BODY><OBJECT data=report.html></OBJECT>
+<h2>Progress Report / Log</h2>
+Started at Thu Sep 19 03:33:43 PM EDT 2024<p>
+Feat main script<br><pre>
+
+/bin/cp /home/tosa/sharp2/murfi-rt-Pyproject/scripts/../subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold.fsf design.fsf
+
+mkdir .files;cp /home/tosa/fsl/doc/fsl.css .files;cp -r /home/tosa/fsl/doc/images .files/images
+
+/home/tosa/fsl/bin/fsl_sub -T 10 -l logs -N feat1a_init   /home/tosa/fsl/bin/feat /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica/design.fsf -D /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica -I 1 -init
+95876
+
+/home/tosa/fsl/bin/fsl_sub -T 6 -l logs -N feat2_pre -j 95876  /home/tosa/fsl/bin/feat /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica/design.fsf -D /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica -I 1 -prestats
+95982
+
+/home/tosa/fsl/bin/fsl_sub -T 1 -l logs -N feat5_stop -j 95982  /home/tosa/fsl/bin/feat /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica/design.fsf -D /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica -stop
+96446
+
+/home/tosa/fsl/bin/fsl_sub -T 10 -l logs -N feat1a_init   /home/tosa/fsl/bin/feat /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/design.fsf -D /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica -I 2 -init
+96623
+
+/home/tosa/fsl/bin/fsl_sub -T 6 -l logs -N feat2_pre -j 96623  /home/tosa/fsl/bin/feat /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/design.fsf -D /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica -I 2 -prestats
+96673
+
+/home/tosa/fsl/bin/fsl_sub -T 1 -l logs -N feat5_stop -j 96673  /home/tosa/fsl/bin/feat /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/design.fsf -D /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica -stop
+97042
+
+/home/tosa/fsl/bin/fsl_sub -T 180 -l logs -N feat4_gica -j 95982,96673  /home/tosa/fsl/bin/feat /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/rs_network.gica/design.fsf -D /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/rs_network.gica -gica
+97176
+
+/home/tosa/fsl/bin/fsl_sub -T 1 -l logs -N feat5_stop -j 97176  /home/tosa/fsl/bin/feat /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/design.fsf -D /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/rs_network.gica -stop
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>
+</pre><hr>Higher-level MELODIC<br><pre>
+
+/home/tosa/fsl/bin/featregapply /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica
+
+/home/tosa/fsl/bin/flirt -ref reg/standard -in reg/standard -out reg_standard/standard -applyisoxfm 2.0
+
+
+/home/tosa/fsl/bin/flirt -ref reg_standard/standard -in filtered_func_data -out /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica/frgrot_nwgkcyd7 -applyxfm -init reg/example_func2standard.mat -interp trilinear -datatype float
+
+
+/home/tosa/fsl/bin/flirt -ref reg_standard/standard -in mask -out /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica/frgrot_ky8ubj6u -applyxfm -init reg/example_func2standard.mat -interp trilinear -datatype float
+
+
+/home/tosa/fsl/bin/fslmaths reg_standard/mask -bin reg_standard/mask -odt char
+
+
+/home/tosa/fsl/bin/featregapply /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica
+
+/home/tosa/fsl/bin/flirt -ref reg/standard -in reg/standard -out reg_standard/standard -applyisoxfm 2.0
+
+
+/home/tosa/fsl/bin/flirt -ref reg_standard/standard -in filtered_func_data -out /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/frgrot_28zg3x1y -applyxfm -init reg/example_func2standard.mat -interp trilinear -datatype float
+
+
+/home/tosa/fsl/bin/flirt -ref reg_standard/standard -in mask -out /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/frgrot_9fpijvfy -applyxfm -init reg/example_func2standard.mat -interp trilinear -datatype float
+
+
+/home/tosa/fsl/bin/fslmaths reg_standard/mask -bin reg_standard/mask -odt char
+
+
+/home/tosa/fsl/bin/fslmerge -t bg_image  /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica/reg_standard/bg_image /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/reg_standard/bg_image
+
+/home/tosa/fsl/bin/fslmaths bg_image -inm 1000 -Tmean bg_image -odt float
+
+/home/tosa/fsl/bin/fslmerge -t mask  /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica/reg_standard/mask /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/reg_standard/mask
+
+mkdir -p inputreg
+
+/home/tosa/fsl/bin/fslmaths ../mask -mul 2 -Tmean masksum -odt short
+
+/home/tosa/fsl/bin/fslmaths masksum -thr 2 -add masksum masksum
+
+/home/tosa/fsl/bin/overlay 0 0 -c ../bg_image -a masksum 0.9 4 masksum_overlay
+
+/home/tosa/fsl/bin/slicer masksum_overlay -S 2 750 masksum_overlay.png
+
+/home/tosa/fsl/bin/fslmaths masksum -mul 0 maskunique
+
+/home/tosa/fsl/bin/fslmaths /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica/reg_standard/mask -mul -1 -add 1 -mul 1 -add maskunique maskunique
+
+/home/tosa/fsl/bin/fslmaths /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/reg_standard/mask -mul -1 -add 1 -mul 2 -add maskunique maskunique
+
+/home/tosa/fsl/bin/fslmaths masksum -thr 1 -uthr 1 -bin -mul maskunique maskunique
+
+/home/tosa/fsl/bin/overlay 0 0 ../bg_image -a maskunique 0.9 2 maskunique_overlay
+
+/home/tosa/fsl/bin/slicer maskunique_overlay -S 2 750 maskunique_overlay.png
+
+/bin/cp /home/tosa/fsl/etc/luts/ramp.gif .ramp.gif
+
+/home/tosa/fsl/bin/fslmaths mask -Tmin -bin mask -odt char
+
+/home/tosa/fsl/bin/melodic -i .filelist -o groupmelodic.ica -v --nobet --bgthreshold=10 --tr=1.200000 --report --guireport=../../report.html --bgimage=bg_image -d 35 --no_mm --sep_vn
+
+Melodic Version 3.15
+
+Melodic results will be in groupmelodic.ica
+
+Create mask ... done
+Randomising input file order
+Reading data file /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked_rs_network.ica/reg_standard/filtered_func_data  ...  done
+  Estimating data smoothness ...  done 
+  Removing mean image ... done
+  Normalising by voxel-wise variance ... done
+Reading data file /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-01_bold_mcflirt_masked_rs_network.ica/reg_standard/filtered_func_data  ...  done
+  Removing mean image ... done
+  Normalising by voxel-wise variance ... done
+  Reducing data matrix to a  119 dimensional subspace 
+
+Excluding voxels with constant value ... done
+  Normalising by voxel-wise variance ... done
+
+  Data size : 119 x 166858
+
+Starting PCA  ... done
+Start whitening using  35 dimensions ... 
+  retaining 87.7883 percent of the variability 
+ ... done
+
+Starting ICA estimation using concat
+
+  Step no. 1 change : 0.979518
+  Step no. 2 change : 0.101806
+  Step no. 3 change : 0.0497077
+  Step no. 4 change : 0.0252276
+  Step no. 5 change : 0.0194239
+  Step no. 6 change : 0.0135131
+  Step no. 7 change : 0.0110617
+  Step no. 8 change : 0.0110931
+  Step no. 9 change : 0.00980547
+  Step no. 10 change : 0.00762354
+  Step no. 11 change : 0.00631071
+  Step no. 12 change : 0.00513428
+  Step no. 13 change : 0.00389329
+  Step no. 14 change : 0.00424562
+  Step no. 15 change : 0.00428351
+  Step no. 16 change : 0.0051367
+  Step no. 17 change : 0.00524184
+  Step no. 18 change : 0.00439056
+  Step no. 19 change : 0.00308237
+  Step no. 20 change : 0.00209313
+  Step no. 21 change : 0.00177588
+  Step no. 22 change : 0.00205151
+  Step no. 23 change : 0.00234299
+  Step no. 24 change : 0.0025906
+  Step no. 25 change : 0.00271404
+  Step no. 26 change : 0.00264728
+  Step no. 27 change : 0.00238094
+  Step no. 28 change : 0.00197551
+  Step no. 29 change : 0.00152765
+  Step no. 30 change : 0.00111951
+  Step no. 31 change : 0.000792449
+  Step no. 32 change : 0.000551822
+  Step no. 33 change : 0.000447251
+  Step no. 34 change : 0.000405188
+  Step no. 35 change : 0.000369281
+  Step no. 36 change : 0.000338829
+  Step no. 37 change : 0.000313167
+  Step no. 38 change : 0.000291626
+  Step no. 39 change : 0.000273541
+  Step no. 40 change : 0.000258263
+  Step no. 41 change : 0.000245706
+  Step no. 42 change : 0.000240022
+  Step no. 43 change : 0.000235132
+  Step no. 44 change : 0.000230844
+  Step no. 45 change : 0.000245235
+  Step no. 46 change : 0.000261293
+  Step no. 47 change : 0.00027705
+  Step no. 48 change : 0.000291537
+  Step no. 49 change : 0.000303777
+  Step no. 50 change : 0.000312855
+  Step no. 51 change : 0.000317996
+  Step no. 52 change : 0.000318651
+  Step no. 53 change : 0.00031456
+  Step no. 54 change : 0.000305791
+  Step no. 55 change : 0.000292737
+  Step no. 56 change : 0.00027607
+  Step no. 57 change : 0.000256654
+  Step no. 58 change : 0.000235451
+  Step no. 59 change : 0.000213413
+  Step no. 60 change : 0.000191395
+  Step no. 61 change : 0.000170103
+  Step no. 62 change : 0.000150062
+  Step no. 63 change : 0.000131615
+  Step no. 64 change : 0.000114946
+  Step no. 65 change : 0.000100107
+  Step no. 66 change : 8.70534e-05
+  Step no. 67 change : 7.5674e-05
+  Step no. 68 change : 6.5821e-05
+  Step no. 69 change : 5.73288e-05
+  Step no. 70 change : 5.00298e-05
+  Step no. 71 change : 4.37641e-05
+  Convergence after 71 steps 
+
+Sorting IC maps
+
+Writing results to : 
+  groupmelodic.ica/melodic_IC
+  groupmelodic.ica/melodic_Tmodes
+  groupmelodic.ica/melodic_mix
+  groupmelodic.ica/melodic_FTmix
+  groupmelodic.ica/melodic_ICstats
+  groupmelodic.ica/mask
+...done
+Creating report index page ...done
+
+
+Creating web report in groupmelodic.ica/report 
+  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35
+
+ To view the output report point your web browser at groupmelodic.ica/report/00index.html
+
+finished!
+

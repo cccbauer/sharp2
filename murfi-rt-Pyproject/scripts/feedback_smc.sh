@@ -51,8 +51,8 @@ then
 	#ifdown wlan0
 	echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 	echo "checking the presence of scanner and stim computer"
-	ping -c 3 192.168.2.1
-	ping -c 3 192.168.2.6
+	#ping -c 3 192.168.2.1
+	#ping -c 3 192.168.2.6
 	echo "make sure Wi-Fi is off"
 	echo "make sure you are Wired Connected to rt-fMRI"
 	echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
@@ -514,6 +514,45 @@ fi
 if [ ${step} = register ]
 then
     clear
+    # Randomization of masks
+
+    current_path=$(pwd)
+    awk -v subject="$subj" -v rct_value="$subj_dir/xml/rct/rct.txt" \
+    '$1 == subject {print $2 > rct_value}' "$current_path/RCT/randomization.tsv"
+
+    # Read the value from the rct.txt file
+    rct_value=$(cat "$subj_dir/xml/rct/rct.txt")
+
+    
+    # This step moves the appropiate masks A & B to be used for feedbck depending on group asignment (i.e. dmn & cen for real and smcl and smcr for sham)
+    # Now, check the content of the rct.txt file
+    # Check if rct.txt contains "1" or "0"
+    if [ "$rct_value" = "1" ]; then
+        # If the content is 1, perform the file renaming
+        cp "$subj_dir/mask/dmn.nii" "$subj_dir/mask/A.nii"
+        cp "$subj_dir/mask/cen.nii" "$subj_dir/mask/B.nii"
+        echo "Randomization applied to masks for subject $subj"
+        
+    elif [ "$rct_value" = "0" ]; then
+        # If the content is 0, perform a different file renaming
+        cp "$subj_dir/mask/smcr.nii" "$subj_dir/mask/A.nii"
+        cp "$subj_dir/mask/smcl.nii" "$subj_dir/mask/B.nii"
+        echo "Randomization applied to masks for subject $subj"
+
+    else
+        
+        # If rct.txt is empty or contains any other value, prompt for input using zenity
+        input_string=$(zenity --forms --title="No valid randomization assignment found" \
+        --separator=" " \
+        --text="No valid randomization assignment found for ${subj}.\n\nPlease add it to \"$current_path/RCT/randomization.tsv\"\n and run this step again." \
+        --cancel-label="Exit" --ok-label="Continue")
+        bash launch_murfi_smc.sh
+    fi
+    
+    
+    
+    
+    
     echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     echo "Registering masks to study_ref"
     latest_ref=$(ls -t $subj_dir/xfm/series*_ref.nii | head -n1)
@@ -594,24 +633,7 @@ then
     xdg-open $subj_dir/qc/rest_warp_to_2vol_native_check.gif
     fsleyes ${latest_ref}_brain  $subj_dir/xfm/epi2reg/rest2studyref_brain $subj_dir/mask/cen.nii -cm red $subj_dir/mask/dmn.nii -cm blue  $subj_dir/mask/smcl.nii -cm yellow $subj_dir/mask/smcr.nii -cm green
 
-    # Randomization of masks
-
-    #echo $subj_dir/xml/rct/rct.txt
-
     
-    # This step moves the appropiate masks A & B to be used for feedbck depending on group asignment (i.e. dmn & cen for real and smcl and smcr for sham)
-    # Now, check the content of the rct.txt file
-    if [ "$(cat "$subj_dir/xml/rct/rct.txt")" = "1" ]; then
-        # If the content is 1, perform the file renaming
-        cp "$subj_dir/mask/dmn.nii" "$subj_dir/mask/A.nii"
-        cp "$subj_dir/mask/cen.nii" "$subj_dir/mask/B.nii"
-        echo "Randomization applied to masks for subject $subject"
-    else
-    # If the content is 0, perform the file renaming
-        cp "$subj_dir/mask/smcr.nii" "$subj_dir/mask/A.nii"
-        cp "$subj_dir/mask/smcl.nii" "$subj_dir/mask/B.nii"
-        echo "Randomization applied to masks for subject $subject"
-    fi
 fi
 
 

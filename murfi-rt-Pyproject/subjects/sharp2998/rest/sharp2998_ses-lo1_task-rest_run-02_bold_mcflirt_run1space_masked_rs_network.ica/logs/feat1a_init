@@ -1,6 +1,0 @@
-</pre><hr>Initialisation<br><pre>
-
-/home/tosa/fsl/bin/fslmaths /home/tosa/sharp2/murfi-rt-Pyproject/subjects/sharp2998/rest/sharp2998_ses-lo1_task-rest_run-02_bold_mcflirt_run1space_masked prefiltered_func_data -odt float
-Total original volumes = 60
-
-/home/tosa/fsl/bin/fslroi prefiltered_func_data example_func 30 1
